@@ -40,7 +40,7 @@ const CURRENCY_NAMES = {
 };
 
 function flagFor(code) {
-  return COUNTRY_FLAGS[code] || '🪙';
+  return COUNTRY_FLAGS[code] || '';
 }
 
 function nameFor(code) {
@@ -182,7 +182,7 @@ function initPicker({ id, initial, onChange }) {
   function select(code) {
     value = code;
     codeEl.textContent = code;
-    flagEl.textContent = flagFor(code);
+    flagEl.textContent = flagForr(code);
     close();
     onChange(code);
   }
@@ -258,7 +258,7 @@ async function loadRates() {
     state.from = codes.includes(DEFAULT_FROM) ? DEFAULT_FROM : codes[0];
     state.to = codes.includes(DEFAULT_TO) ? DEFAULT_TO : codes[0];
 
-    $('rates-count').textContent = `${codes.length} валют`;
+    $('rates-count').textContent = `${codes.length - 1} валют`;
 
     fromPicker.setValue(state.from);
     toPicker.setValue(state.to);
@@ -330,7 +330,7 @@ function convertFromAmount() {
 
   resultOut.textContent = formatMoney(result);
   rateLine.textContent =
-    `1 ${from} = ${formatRate(rate(from, to))} ${to} · 1 ${to} = ${formatRate(rate(from, to))} ${from}`;
+    `1 ${from} = ${formatRate(rate(from, to))} ${to} · 1 ${to} = ${formatRate(1 / rate(from, to))} ${from}`;
 }
 
 function renderTable() {
