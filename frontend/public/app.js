@@ -40,7 +40,7 @@ const CURRENCY_NAMES = {
 };
 
 function flagFor(code) {
-  return COUNTRY_FLAGS[code] || '';
+  return COUNTRY_FLAGS[code] || '🪙';
 }
 
 function nameFor(code) {
