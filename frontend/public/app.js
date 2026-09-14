@@ -321,16 +321,16 @@ function convertFromAmount() {
   const from = state.from;
   const to = state.to;
   const raw = parseFloat(amountInput.value);
-  const amount = Number.isNaN(raw) ? 0 : Math.max(0, raw);
+  const amount = Number.isNaN(raw) ? 0 : raw;
 
   if (!state.rates || !state.rates[from] || !state.rates[to]) return;
 
   const valueInBase = amount / state.rates[from];
-  const result = valueInBase * state.rates[to];
+  const result = valueInBase / state.rates[to];
 
   resultOut.textContent = formatMoney(result);
   rateLine.textContent =
-    `1 ${from} = ${formatRate(rate(from, to))} ${to} · 1 ${to} = ${formatRate(1 / rate(from, to))} ${from}`;
+    `1 ${from} = ${formatRate(rate(from, to))} ${to} · 1 ${to} = ${formatRate(rate(from, to))} ${from}`;
 }
 
 function renderTable() {
@@ -408,8 +408,18 @@ swapBtn.addEventListener('click', () => {
   swapBtn.classList.remove('spin');
   void swapBtn.offsetWidth;
   swapBtn.classList.add('spin');
-
-  convertFromAmount();
 });
 
 loadRates();
+
+async function refreshRates() {
+  try {
+    const res = await fetch('/api/rates');
+    if (!res.ok) return;
+    const data = await res.json();
+    state.rates = data.rates;
+    render();
+  } catch { /* молча пропускаем */ }
+}
+
+setInterval(refreshRates, 30000);
