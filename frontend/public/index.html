@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Валютный калькулятор</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💱</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+  </div>
+
+  <main class="page">
+    <header class="header">
+      <div class="logo">💱</div>
+      <div>
+        <h1 class="title">Валютный калькулятор</h1>
+        <p class="subtitle" id="updated">Загрузка курсов…</p>
+      </div>
+    </header>
+
+    <div class="layout">
+    <section class="card converter">
+      <div class="ccy-row">
+        <div class="field">
+          <label class="field-label" for="amount">Сумма</label>
+          <input
+            class="amount-input"
+            id="amount"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="any"
+            placeholder="1000"
+            value="1000"
+          />
+        </div>
+
+        <div class="ccy-select">
+          <span class="flag" id="from-flag">🇺🇸</span>
+          <button type="button" class="ccy-trigger" id="from-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта, из которой конвертируем">
+            <span class="ccy-code" id="from-code">USD</span>
+          </button>
+          <div class="ccy-dropdown" id="from-dropdown" hidden>
+            <input type="text" class="ccy-search" id="from-search" placeholder="Поиск: USD, евро…" autocomplete="off" spellcheck="false" />
+            <ul class="ccy-list" id="from-list" role="listbox"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="swap-divider">
+        <span class="line" aria-hidden="true"></span>
+        <button class="swap-btn" id="swap" type="button" aria-label="Поменять валюты местами" title="Поменять местами">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M7 4v13m0 0-2.5-2.5M7 17l2.5-2.5M17 20V7m0 0 2.5 2.5M17 7l-2.5 2.5"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </button>
+        <span class="line" aria-hidden="true"></span>
+      </div>
+
+      <div class="ccy-row">
+        <div class="field result-field">
+          <label class="field-label" for="result">Результат</label>
+          <output class="result" id="result">—</output>
+        </div>
+
+        <div class="ccy-select">
+          <span class="flag" id="to-flag">🇪🇺</span>
+          <button type="button" class="ccy-trigger" id="to-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта, в которую конвертируем">
+            <span class="ccy-code" id="to-code">EUR</span>
+          </button>
+          <div class="ccy-dropdown" id="to-dropdown" hidden>
+            <input type="text" class="ccy-search" id="to-search" placeholder="Поиск: USD, евро…" autocomplete="off" spellcheck="false" />
+            <ul class="ccy-list" id="to-list" role="listbox"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="rate-line" id="rate-line">1 USD = — EUR</div>
+      <div class="error-banner" id="error-banner" hidden></div>
+    </section>
+
+    <section class="card rates-card">
+      <div class="rates-head">
+        <div class="rates-title-wrap">
+          <h2 class="section-title">Курсы валют</h2>
+          <span class="ccy-count" id="rates-count"></span>
+        </div>
+        <div class="rates-base">
+          <span class="flag" id="rates-flag">🇺🇸</span>
+          <button type="button" class="ccy-trigger compact" id="rates-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Базовая валюта таблицы">
+            <span class="ccy-code" id="rates-code">USD</span>
+          </button>
+          <div class="ccy-dropdown rates-dropdown" id="rates-dropdown" hidden>
+            <input type="text" class="ccy-search" id="rates-search" placeholder="Поиск: USD, евро…" autocomplete="off" spellcheck="false" />
+            <ul class="ccy-list" id="rates-list" role="listbox"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="rates-table" id="rates-table">
+          <thead>
+            <tr>
+              <th>Валюта</th>
+              <th class="num">Курс</th>
+              <th class="num">За 1</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="table-hint">Прокрутите список вниз, чтобы увидеть все валюты</div>
+    </section>
+    </div>
+
+    <footer class="footer">
+      Курсы обновляются автоматически раз в 10 минут. Источник: открытые данные биржевых курсов.
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

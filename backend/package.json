@@ -1,0 +1,18 @@
+{
+  "name": "valuta-backend",
+  "version": "1.0.0",
+  "description": "Currency converter API. Fetches live exchange rates with in-memory caching and a static fallback.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "license": "MIT"
+}
