@@ -67,7 +67,7 @@ docker compose version
 Скопируйте ссылку на ваш GitHub-репозиторий и выполните в терминале:
 
 ```bash
-git clone https://github.com/<ВЫШ-ЛОГИН>/valuta_calculate_university.git
+git clone https://github.com/NiksKSS/valuta_calculate_university.git
 cd valuta_calculate_university
 ```
 
