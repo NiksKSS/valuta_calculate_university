@@ -258,7 +258,7 @@ async function loadRates() {
     state.from = codes.includes(DEFAULT_FROM) ? DEFAULT_FROM : codes[0];
     state.to = codes.includes(DEFAULT_TO) ? DEFAULT_TO : codes[0];
 
-    $('rates-count').textContent = `${codes.length - 1} валют`;
+    $('rates-count').textContent = '10 валют';
 
     fromPicker.setValue(state.from);
     toPicker.setValue(state.to);
